@@ -3,14 +3,11 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var request = require("request");
-
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
 var axios = require("axios");
 var cheerio = require("cheerio");
 
 // Require all models
+var Player = require('./models/player.js');
 //var db = require("./models");
 
 var PORT = 3000;
@@ -30,38 +27,38 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/redditScraper");
 
-// Routes
 
-// A GET route for scraping the echoJS website
 request("https://www.futhead.com/18/players/", function(error, response, html) {
 
-  // Load the HTML into cheerio and save it to a variable
-  // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
-  var $ = cheerio.load(html);
+    var $ = cheerio.load(html);
 
-  // An empty array to save the data that we'll scrape
-  var results = [];
+    // An empty array to save the data that we'll scrape
+    var result = [];
 
-  // With cheerio, find each p-tag with the "title" class
-  // (i: iterator. element: the current element)
-  $("span.player-name").each(function(i, element) {
+    // Now, grab every everything with a class of "inner" with each "article" tag
+    $('a.display-block').each(function(i, element) {
 
-    // Save the text of the element in a "title" variable
-    var title = $(element).text();
+        // Create an empty result object
+        var playerStat = {};
 
-    // In the currently selected element, look at its child elements (i.e., its a-tags),
-    // then save the values for any "href" attributes that the child elements may have
-    //var playerCountry = $(element).children().attr("href");
+        result.rating = $(this).children('.player-rating').children('span').text().trim() ; 
 
-    // Save these results in an object that we'll push into the results array we defined earlier
-    results.push({
-      title: title,
-      //link: link
+        result.player = $(this).children('.player-info').children('.player-name').text().trim();
+
+        if(result.player === ''){
+            
+        }else
+        result.push({
+            name: result.player,
+            rating: result.rating
+ 
+        });
+
     });
-  });
+    console.log(result);
 
-  // Log the results once you've looped through each of the elements found with cheerio
-  console.log(results);
+
+
 });
 
 
