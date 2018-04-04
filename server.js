@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
+mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/redditScraper");
 
 
@@ -41,18 +42,19 @@ request("https://www.futhead.com/18/players/", function(error, response, html) {
         // Create an empty result object
         var playerStat = {};
 
-        result.rating = $(this).children('.player-rating').children('span').text().trim() ; 
+        playerStat.rating = $(this).children('.player-rating').children('span').text().trim();
 
-        result.player = $(this).children('.player-info').children('.player-name').text().trim();
+        playerStat.Name = $(this).children('.player-info').children('.player-name').text().trim();
 
-        if(result.player === ''){
-            
-        }else
-        result.push({
-            name: result.player,
-            rating: result.rating
- 
-        });
+        if (playerStat.Name === '') {
+
+        } else{
+            console.log(playerStat);
+            Player.create(playerStat).then(function(userdb) {
+                result.push(Player);
+            }).catch(function(err){
+                return err;
+            })}
 
     });
     console.log(result);
