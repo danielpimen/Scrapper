@@ -21,24 +21,12 @@ var PlayerSchema = new Schema({
     type: String,
     required: true
   },
-  
-  // Link to Player
-  Link: {
-    type: String,
-    required: true
-  },
 
   // Date of article scrape (saving as a string to pretify it in Moment-JS)
   updated: {
     type: String,
     default: moment().format('MMMM Do YYYY, h:mm A')
-  },
-
-  // Create a relation with the Comment model
-  comments: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Comment'
-  }]
+  }
 
 });
 

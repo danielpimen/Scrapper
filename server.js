@@ -7,7 +7,7 @@ var axios = require("axios");
 var cheerio = require("cheerio");
 
 // Require all models
-var Player = require('./models/player.js');
+var db = require('./models/player');
 //var db = require("./models");
 
 var PORT = 3000;
@@ -28,43 +28,8 @@ app.use(express.static("public"));
 mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/redditScraper");
 
-
-request("https://www.futhead.com/18/players/", function(error, response, html) {
-
-    var $ = cheerio.load(html);
-
-    // An empty array to save the data that we'll scrape
-    var result = [];
-
-    // Now, grab every everything with a class of "inner" with each "article" tag
-    $('a.display-block').each(function(i, element) {
-
-        // Create an empty result object
-        var playerStat = {};
-
-        playerStat.rating = $(this).children('.player-rating').children('span').text().trim();
-
-        playerStat.Name = $(this).children('.player-info').children('.player-name').text().trim();
-
-        if (playerStat.Name === '') {
-
-        } else{
-            console.log(playerStat);
-            Player.create(playerStat).then(function(userdb) {
-                result.push(Player);
-            }).catch(function(err){
-                return err;
-            })}
-
-    });
-    console.log(result);
-
-
-
-});
-
-
-
+var router = require('./controllers/controller.js');
+app.use('/', router);
 
 // Start the server
 app.listen(PORT, function() {
