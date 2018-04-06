@@ -1,3 +1,5 @@
 <h2>Player Names and Ratings</h2>
-<h3>{{#each hbsObject}}</h3>
+{{#each players}}
+    <h3>{{this.Name}}</h3>
+    <p>Rating: {{this.rating}}</p>
 {{/each}}

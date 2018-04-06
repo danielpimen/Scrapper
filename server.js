@@ -33,7 +33,7 @@ mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/redditScraper");
 
 var router = require('./controllers/controller.js');
-app.use('/', router);
+app.use(router);
 
 // Start the server
 app.listen(PORT, function() {
