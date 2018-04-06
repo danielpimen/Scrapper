@@ -6,20 +6,15 @@ var request = require('request'); // for web-scraping
 var cheerio = require('cheerio'); // for web-scraping
 
 // Import the Comment and Article models
-var db = require('../models/player.js');
+var Player = require('../models/player.js');
 
 // Index Page Render (first visit to the site)
-router.get('/', function (req, res){
 
-  // Scrape data
-  res.redirect('/scrape');
-
-});
 ///////////////////////////////////////////////////////////////////////////////////////
 router.get('/players', function (req, res){
 
   // Query MongoDB for all article entries (sort newest to top, assuming Ids increment)
-  Player.find().sort({_id: -1})
+  Player.find().sort({_id: 1})
 
     // But also populate all of the comments associated with the articles.
    // .populate('comments')
@@ -32,9 +27,9 @@ router.get('/players', function (req, res){
       } 
       // or send the doc to the browser as a json object
       else {
-        var hbsObject = {articles: doc}
+        var hbsObject = {players: doc}
         res.render('index', hbsObject);
-        // res.json(hbsObject)
+       console.log(hbsObject)
       }
     });
 
@@ -69,7 +64,7 @@ request("https://www.futhead.com/18/players/", function(error, response, html) {
 
         } else{
             //console.log(playerStat);
-            db.create(playerStat).then(function(userdb) {
+            Player.create(playerStat).then(function(userdb) {
                 result.push(Player);
             }).catch(function(err){
                 return err;

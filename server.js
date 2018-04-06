@@ -5,6 +5,7 @@ var mongoose = require("mongoose");
 var request = require("request");
 var axios = require("axios");
 var cheerio = require("cheerio");
+var exphbs = require("express-handlebars");
 
 // Require all models
 var db = require('./models/player');
@@ -14,6 +15,9 @@ var PORT = 3000;
 
 // Initialize Express
 var app = express();
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 
 // Configure middleware
 
