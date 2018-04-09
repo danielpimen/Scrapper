@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Players</title>
-    </head>
-    <body>
-        <h1> Players</h1>
-        {{{ body }}}
-        <h5> Yo its Daniel's App</h5>
-    </body>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <title>Daniel Pimentel</title>
+    <style type="text/css">
+    .navbar {
+        background-color: black;
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">About Me</a>
+        <a class="navbar-brand" href="#">GitHub Repo</a>
+        <a class="navbar-brand" href="#">Portfolio</a>
+    </nav>
+    <h1 class='text-center'> Build Your Dream Fifa Ultimate Team</h1>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <span class="input-group-addon">Player Name</span>
+                <input type="text" class="form-control" aria-label="Text input with checkbox">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group">
+                <span class="input-group-addon">Player Rating </span>
+                <input type="text" class="form-control" aria-label="Text input with radio button">
+            </div>
+        </div>
+    </div>
+    {{{ body }}}
+    <h5></h5>
+    <script>
+    	console.log('Hello');
+    </script>
+</body>
+
 </html>
