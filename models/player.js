@@ -10,23 +10,27 @@ var Schema = mongoose.Schema;
 // Create Article Schema
 var PlayerSchema = new Schema({
 
-  // Player Name
-  Name: {
-    type: String,
-    required: true
-  },
+    // Player Name
+    Name: {
+        type: String,
+        required: true
+    },
 
-  // Rating
-  rating: {
-    type: String,
-    required: true
-  },
+    // Rating
+    rating: {
+        type: String,
+        required: true
+    },
+    link: {
+        type: String,
+        required: true
+    },
 
-  // Date of article scrape (saving as a string to pretify it in Moment-JS)
-  updated: {
-    type: String,
-    default: moment().format('MMMM Do YYYY, h:mm A')
-  }
+    // Date of article scrape (saving as a string to pretify it in Moment-JS)
+    updated: {
+        type: String,
+        default: moment().format('MMMM Do YYYY, h:mm A')
+    }
 
 });
 

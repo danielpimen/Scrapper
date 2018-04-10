@@ -13,9 +13,9 @@
 
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">About Me</a>
-        <a class="navbar-brand" href="#">GitHub Repo</a>
-        <a class="navbar-brand" href="#">Portfolio</a>
+        <a class="navbar-brand" href="https://www.linkedin.com/in/daniel-pimentel1992/">About Me</a>
+        <a class="navbar-brand" href="https://github.com/danielpimen/Scrapper">GitHub Repo</a>
+        <a class="navbar-brand" href="https://github.com/danielpimen">Portfolio</a>
     </nav>
     <h1 class='text-center'> Build Your Dream Fifa Ultimate Team</h1>
     <div class="row">
@@ -34,8 +34,16 @@
     </div>
     {{{ body }}}
     <h5></h5>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
     	console.log('Hello');
+    	$("p").click(function(){
+    		const player = $("p").text();
+    		//let playerLink1 = player.slice(3, -3);
+    		
+    		console.log(player);
+    		//window.location.replace(this);
+    	})
     </script>
 </body>
 

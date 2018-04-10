@@ -25,15 +25,21 @@ app.set("view engine", "handlebars");
 app.use(logger("dev"));
 // Use body-parser for handling form submissions
 app.use(bodyParser.urlencoded({ extended: true }));
+
+var router = require('./controllers/controller.js');
+app.use(router);
+app.get('/', function (req, res) {
+  res.redirect('/players');
+})
+
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/redditScraper");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/redditScraper");
 
-var router = require('./controllers/controller.js');
-app.use(router);
+
 
 // Start the server
 app.listen(PORT, function() {

@@ -10,6 +10,7 @@ var Player = require('../models/player.js');
 
 // Index Page Render (first visit to the site)
 
+
 ///////////////////////////////////////////////////////////////////////////////////////
 router.get('/players', function (req, res){
 
@@ -59,6 +60,8 @@ request("https://www.futhead.com/18/players/", function(error, response, html) {
         playerStat.rating = $(this).children('.player-rating').children('span').text().trim();
 
         playerStat.Name = $(this).children('.player-info').children('.player-name').text().trim();
+
+        playerStat.link = $(element).attr("href");
 
         if (playerStat.Name === '') {
 

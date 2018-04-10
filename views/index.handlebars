@@ -1,5 +1,7 @@
 <h2>Player Names and Ratings</h2>
 {{#each players}}
     <h3>{{this.Name}}</h3>
-    <p>Rating: {{this.rating}}</p>
+    <h5>Rating: {{this.rating}}</h5>
+    <a href ="https://www.futhead.com{{this.link}}">Learn More</a>
+
 {{/each}}
